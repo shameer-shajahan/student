@@ -1,0 +1,95 @@
+
+
+
+class Student(models.Model):
+
+    name=models.CharField(max_length=100)
+
+    age=models.PositiveIntegerField()
+
+    standard=models.CharField(max_length=50)
+
+    gender=models.CharField(max_length=50)
+
+    address=models.TextField()
+
+    mobile=models.CharField(max_length=12)
+
+    email=models.EmailField()
+
+
+
+
+modelname.object.create(field=value,field2=value2)
+
+Student.object.create(name="riya",
+                        age="12",
+                        standard="6",
+                        address="alpy",
+                        gender="female",
+                        mobile="9786765456",
+                        email="riya@gmail.com",
+)
+
+for query for fecting all records 
+
+qs=modelname.objects.all()
+
+qs=Student.objects.all()
+
+to get a specific records from orm
+
+qs=modelname.objects.get(primarykey=value)
+qs.name
+
+>>> qs=Student.objects.get(id=4)
+>>> qs.name
+'rahul'
+
+qrm query for filtering employees
+
+qs=Student.objects.filtering(gender="male")
+
+
+
+field lookup
+
+
+lessthan in omr query
+
+__lt
+
+lessthan or equal in omr query
+
+__lte
+
+greaterthan in omr query
+
+__gt
+
+greaterthan or equal in omr query
+
+__gtent
+
+not equal in orm query
+
+.exclude
+
+
+
+
+update the query
+
+Student.objects.filter(id=4).update(age=23)
+
+delete the records from orm
+
+Student.objects.get(id=5).delete()
+
+qs=Student.objects.all().order_by("-age")
+
+--startswith
+
+qs=Student.objects.filter(name__startswith="a")
+
+from Django.db.model import min   
