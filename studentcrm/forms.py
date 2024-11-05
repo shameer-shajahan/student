@@ -2,23 +2,37 @@ from django import forms
 
 from studentcrm.models import Student
 
-class StudentForm(forms.Form):
+from django.contrib.auth.models import User
 
-    name=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control"}))
+class StudentForm(forms.ModelForm):
+     
+    class Meta:
 
-    age=forms.CharField()
+        model=Student
 
-    standard=forms.CharField()
+        fields="__all__"
 
-    gender=forms.ChoiceField(choices=Student.gender_option)
+        widgets={
+            
+            "name":forms.TextInput(attrs={"class":"form-control"}),
 
-    address=forms.CharField()
+            "age":forms.TextInput(attrs={"class":"form-control"}),
 
-    mobile=forms.CharField()
+            "standard":forms.TextInput(attrs={"class":"form-control"}),
 
-    email=forms.EmailField()
+            "gender":forms.Select(attrs={"class":"form-control"}),
 
-    picture=forms.ImageField()
+            "address":forms.Textarea(attrs={"class":"form-control","rows":5}),
+            
+            "mobile":forms.NumberInput(attrs={"class":"form-control"}),
+            
+            "email":forms.EmailInput(attrs={"class":"form-control"}),
+             
+                        
+            "picture":forms.FileInput(attrs={"class":"form-control"})
+            
+    
+        }
 
 class StudentUpdateForm(forms.ModelForm):
 
@@ -48,6 +62,43 @@ class StudentUpdateForm(forms.ModelForm):
             
     
         }
+
+class SignupForm(forms.ModelForm):
+
+    class Meta:
+
+        model=User
+
+        fields=["username","email","password"]
+
+        widgets={
+
+        "username":forms.TextInput(attrs={"class" : "form-control"}),
+
+        "email":forms.EmailInput(attrs={"class" : "form-control"}),
+
+        "password":forms.PasswordInput(attrs={"class" : "form-control"})
+
+        }
+
+
+class SigninForm(forms.ModelForm):
+
+    class Meta:
+
+        model=User
+
+        fields=["username","password"]
+
+        widgets={
+
+        "username":forms.TextInput(attrs={"class" : "form-control"}),
+
+        "password":forms.PasswordInput(attrs={"class" : "form-control"})
+
+        }
+
+
 
 
 

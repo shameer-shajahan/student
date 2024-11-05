@@ -2,11 +2,13 @@ from django.shortcuts import render,redirect,get_object_or_404
 
 from django.views.generic import View
 
-from studentcrm.forms import StudentForm,StudentUpdateForm
+from studentcrm.forms import StudentForm,StudentUpdateForm,SignupForm,SigninForm
 
 from studentcrm.models import Student
 
 from django.db.models import Q
+
+from django.contrib.auth.models import User
 
 
 class StudentView(View):
@@ -148,7 +150,47 @@ class StudentUpdateView(View):
         
         return render(request,self.template_name,{"forms":form_instance})
 
-            
+class SignupView(View):
+
+    template_name="register.html"
+
+    form_class=SignupForm
+
+    def get(self,request,*args,**kwargs):
+
+        form_instance=self.form_class
+
+        return render(request,self.template_name,{"form":form_instance})
+    
+    def post(self,request,*args,**kwargs):
+
+        form_data=request.POST
+
+        form_instance=self.form_class(form_data)
+
+        if form_instance.is_valid():
+
+            data=form_instance.cleaned_data
+
+            User.objects.create_user(**data)
+
+            return redirect("signin")
+    
+        return render(request,self.template_name,{"form":form_instance})
 
 
-        
+
+class SigninView(View):
+
+    template_name="signin.html"
+
+    form_class=SigninForm
+
+    def get(self,request,*args,**kwargs):
+
+        form_instance=self.form_class
+
+        return render(request,self.template_name,{"form":form_instance})
+
+
+

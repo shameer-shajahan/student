@@ -27,5 +27,8 @@ urlpatterns = [
     path('student/<int:pk>/',views.StudentDetailView.as_view(),name="student_detail"),
     path('student/<int:pk>/remove/',views.StudentDeleteView.as_view(),name="student_delete"),
     path('student/<int:pk>/update/',views.StudentUpdateView.as_view(),name="student_update"),
+    path('signup/',views.SignupView.as_view(),name="register"),
+    path('signin/',views.SigninView.as_view(),name="signin"),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  

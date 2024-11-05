@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div class="row"></div>
-        <div class="col-4">
-            <img src="{{data.picture.url}}" class="card-img-top" alt="..." style="height: 340px; width: 260px; ">
-        </div>
-        <div class="col-4"></div>
-        <div class="col-4"></div>    <p> {{data.name}}</p>
-    <p>{{data.age}}</p>
+{%extends 'base.html'%}
 
-</body>
-</html>
+{%block main_block%}
+
+<div class="container">
+    <div class="row"></div>
+    <div class="col-4">
+        <img src="{{data.picture.url}}" class="card-img-top" alt="..." style="height: 340px; width: 260px; ">
+    </div>
+    <div class="col-4"></div>
+    <div class="col-4"></div>
+    <p> {{data.name}}</p>
+    <p>{{data.age}}</p>
+</div>
+
+{%endblock%}
