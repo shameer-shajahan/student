@@ -51,6 +51,11 @@
                 </datalist>
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+            <ul>
+              <li>
+                <a href="{%url 'sigout'%}" class="nav-link"> {{request.user}} logout</a>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>

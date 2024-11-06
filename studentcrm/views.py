@@ -10,6 +10,8 @@ from django.db.models import Q
 
 from django.contrib.auth.models import User
 
+from django.contrib.auth import authenticate,logout,login
+
 
 class StudentView(View):
 
@@ -46,6 +48,8 @@ class StudentList(View):
     template_name=("student_list.html")
 
     def get(self,request,*arg,**kwargs):
+
+        # if not request.user
 
         search_text=request.GET.get("filter")
 
@@ -178,8 +182,6 @@ class SignupView(View):
     
         return render(request,self.template_name,{"form":form_instance})
 
-
-
 class SigninView(View):
 
     template_name="signin.html"
@@ -191,6 +193,47 @@ class SigninView(View):
         form_instance=self.form_class
 
         return render(request,self.template_name,{"form":form_instance})
+    
+    def post(self,request,*args,**kwargs):
+
+        form_data=request.POST
+
+        form_instance=self.form_class(form_data)
+
+        if form_instance.is_valid():
+
+            data=form_instance.cleaned_data
+
+            uname=data.get("username")
+
+            pwd=data.get("password")
+
+            user_object=authenticate(request,username=uname,password=pwd)
+
+            if user_object:
+
+                login(request,user_object)
+
+                return redirect("student_list")
+            
+        return render(request,self.template_name,{"form":form_instance})
+    
+class SignoutView(View):
+
+    def get(self,request,*args,**kwargs):
+
+        logout(request)
+
+        return redirect("signin")
+    
+
+            
+
+
+        
+    
+
+
 
 
 

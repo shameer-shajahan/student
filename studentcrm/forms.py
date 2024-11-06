@@ -82,21 +82,11 @@ class SignupForm(forms.ModelForm):
         }
 
 
-class SigninForm(forms.ModelForm):
+class SigninForm(forms.Form):
 
-    class Meta:
+    username=forms.CharField(widget=forms.TextInput(attrs={"class" : "form-control"}))
 
-        model=User
-
-        fields=["username","password"]
-
-        widgets={
-
-        "username":forms.TextInput(attrs={"class" : "form-control"}),
-
-        "password":forms.PasswordInput(attrs={"class" : "form-control"})
-
-        }
+    password=forms.CharField(widget=forms.PasswordInput(attrs={"class" : "form-control"}))
 
 
 
